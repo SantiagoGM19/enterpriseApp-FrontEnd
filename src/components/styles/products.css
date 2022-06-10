@@ -2,17 +2,28 @@
     margin-top: 2%;
     margin-left: 8%;
     margin-right: 8%;
-    height: 500px;
+    height: fit-content;
     border: solid 0px;
-    box-shadow: 5px 5px;
+    box-shadow: 6px 6px rgba(0, 0, 0, 0.73);
     background-color: rgba(71, 61, 139, 0.758);
     display: flex;
+    border-radius: 40px;
 }
 
 .product{
     margin: 3%;
     width: 20%;
-    height: 300px;
+    height: fit-content;
+}
+
+.add-product{
+    margin: 15%;
+    font-size: 40px;
+    font-weight: bolder;
+    height: 100px;
+    width: 100px;
+    border-radius: 20px;
+    box-shadow: 5px 5px rgb(0, 76, 0);
 }
 
 h1{

@@ -4,7 +4,7 @@ export type Product = {
     description:string,
     minimum:number,
     maximum:number,
-    currentStock:number,
+    stock:number,
     price:number,
     provider:ProviderObject
 }
