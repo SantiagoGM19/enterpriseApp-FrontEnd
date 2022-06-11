@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
     listOfProducts: [
         {
-            id: "",
+            productId: "",
             name: "",
             description: "default description",
             minimum: 0,
@@ -28,14 +28,18 @@ const productSlice = createSlice(
                 const newState = { ...state, listOfProducts: action.payload }
                 return newState
             },
-            addProduct(state, action) {
+            saveProduct(state, action) {
+                const newListOfProducts = [...state.listOfProducts, action.payload]
+                const newState = { ...state, listOfProducts: newListOfProducts }
+                return newState
+            },
+            updateProductState(state, action) {
 
             },
-            updateProduct(state, action) {
-
-            },
-            deleteProduct(state, action) {
-
+            deleteProductState(state, action) {
+                const newListOfProducts = state.listOfProducts.filter(product => product.productId !== action.payload)
+                const newState = { ...state, listOfProviders: newListOfProducts }
+                return newState
             }
         }
     }
@@ -44,7 +48,7 @@ const productSlice = createSlice(
 export default productSlice.reducer
 
 export const {
-    getAllProducts, 
-    addProduct, 
-    updateProduct, 
-    deleteProduct} = productSlice.actions
+    getAllProducts,
+    saveProduct,
+    updateProductState,
+    deleteProductState } = productSlice.actions

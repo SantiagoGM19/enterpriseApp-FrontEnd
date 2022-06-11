@@ -20,7 +20,7 @@ export const addProduct = async (product: Product) => {
 };
 
 export const updateProduct = async (product: Product) => {
-    let productUpdatedPromise = await fetch(`http://localhost:8081/products/${product.id}`,
+    let productUpdatedPromise = await fetch(`http://localhost:8081/products/${product.productId}`,
         {
             method: 'PUT',
             headers: {
