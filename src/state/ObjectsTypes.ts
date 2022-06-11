@@ -16,17 +16,17 @@ export type ProviderObject = {
 }
 
 export type Receipt = {
-    id:string,
-    providerName:string,
-    listOfProductsReceived:Product[],
-    idProvider:string
+    receiptId?:string,
+    name:string,
+    productsReceived:Product[],
+    providerId:string
 }
 
 export type Bill = {
-    id:string,
+    billId?:string,
     date:Date,
     clientName:string,
     salePerson:string,
-    listOfProductsBought:Product[],
+    productsBought:Product[],
     totalPaid:number
 }
