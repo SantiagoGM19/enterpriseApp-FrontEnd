@@ -1,5 +1,5 @@
 export type Product = {
-    id:string,
+    id?:string,
     name:string,
     description:string,
     minimum:number,
@@ -10,7 +10,7 @@ export type Product = {
 }
 
 export type ProviderObject = {
-    id:string,
+    providerId?:string,
     name:string,
     phone:string
 }

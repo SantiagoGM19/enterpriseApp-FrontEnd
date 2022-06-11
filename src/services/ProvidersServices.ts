@@ -6,7 +6,7 @@ export const fetchAllProviders = async () => {
     return data
 };
 
-export const addProvider = async (provider: ProviderObject) => {
+export const saveProvider = async (provider: ProviderObject) => {
     let providerSavedPromise = await fetch("http://localhost:8081/providers",
         {
             method: 'POST',
@@ -20,7 +20,7 @@ export const addProvider = async (provider: ProviderObject) => {
 };
 
 export const updateProvider = async (provider: ProviderObject) => {
-    let providerUpdatedPromise = await fetch(`http://localhost:8081/products/${provider.id}`,
+    let providerUpdatedPromise = await fetch(`http://localhost:8081/providers/${provider.providerId}`,
         {
             method: 'PUT',
             headers: {
@@ -33,7 +33,7 @@ export const updateProvider = async (provider: ProviderObject) => {
 };
 
 export const deleteProvider = async (id: string) => {
-    let response = await fetch(`http://localhost:8081/products/${id}`,
+    let response = await fetch(`http://localhost:8081/providers/${id}`,
         {
             method: 'DELETE'
         })

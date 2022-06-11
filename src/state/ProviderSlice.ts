@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
     listOfProviders: [
         {
-            id: '',
+            providerId: '',
             name: '',
             phone: ''
         }
@@ -19,13 +19,17 @@ const providerSlice = createSlice({
             return newState
         },
         addProvider(state, action) {
-
+            const newListOfProviders = [...state.listOfProviders, action.payload]
+            const newState = {...state, listOfProviders: newListOfProviders}
+            return newState
         },
-        updateProvider(state, action) {
-
+        updateProviderState(state, action) {
+            const newListOfProviders = state.listOfProviders.filter(provider => provider.providerId !== action.payload)
+            const newState = {...state, listOfProviders: newListOfProviders}
+            return newState
         },
-        deleteProvider(state, action) {
-
+        deleteProviderState(state, action) {
+            
         }
     }
 })
@@ -35,6 +39,6 @@ export default providerSlice.reducer
 export const {
     getAllProviders,
     addProvider,
-    updateProvider,
-    deleteProvider
+    updateProviderState,
+    deleteProviderState
 } = providerSlice.actions
