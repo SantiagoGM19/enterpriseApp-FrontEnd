@@ -6,6 +6,13 @@ export const fetchAllProducts = async () => {
     return data
 }
 
+export const fetchProductById = async (id:string) => {
+    let response = await fetch(`http://localhost:8081/products/${id}`)
+    let data = response.json()
+    return data
+}
+
+
 export const addProduct = async (product: Product) => {
     let productSavedPromise = await fetch("http://localhost:8081/products",
         {

@@ -1,0 +1,15 @@
+.receipt-form {
+    margin-top: 5rem;
+    margin-left: 20rem;
+    margin-right: 20rem;
+    padding: 2rem;
+    border: 2px solid #ccc;
+    text-align: center;
+    background-color: #1d2d50e1;
+    color: white;
+}
+
+.organize-buttons{
+    margin-top: 2rem;
+    margin-right: 5rem;
+}

@@ -3,10 +3,10 @@ import Bills from "./pages/Bills/Bills"
 import MainPage from "./pages/MainPage"
 import Products from "./pages/Products/Products"
 import Providers from "./pages/Providers/Providers"
+import ReceiptForm from "./pages/Receipts/ReceiptForm"
 import Receipts from "./pages/Receipts/Receipts"
 
 function App() {
-
   return (
     <BrowserRouter>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -38,9 +38,8 @@ function App() {
         <Route path="/providers" element={<Providers />} />
         <Route path="/bills" element={<Bills />} />
         <Route path="/receipts" element={<Receipts />} />
-        <Route path="/products/form" />
         <Route path="/bills/form" />
-        <Route path="/receipts/form" />
+        <Route path="/receipts/form" element={<ReceiptForm />} />
       </Routes>
     </BrowserRouter>
   )

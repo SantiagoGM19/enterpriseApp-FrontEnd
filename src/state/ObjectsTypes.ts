@@ -19,7 +19,8 @@ export type Receipt = {
     receiptId?:string,
     name:string,
     productsReceived:Product[],
-    providerId:string
+    providerId:string,
+    date: Date
 }
 
 export type Bill = {

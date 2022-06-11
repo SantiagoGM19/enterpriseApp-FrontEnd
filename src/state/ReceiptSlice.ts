@@ -4,7 +4,7 @@ const initialState = {
     listOfReceipts: [
         {
             receiptId: '',
-            providerName: '',
+            name: '',
             productsReceived: [
                 {
                     productId: "",
@@ -21,7 +21,8 @@ const initialState = {
                     }
                 }
             ],
-            providerId: ''
+            providerId: '',
+            date: Date.now()
         }
     ]
 }
@@ -34,9 +35,10 @@ const receiptSlice = createSlice({
             const listOfReceipts = [...action.payload]
             const newStateListOfReceipts = listOfReceipts.map(receipt => {
                 return {receiptId: receipt.receiptId, 
-                    providerName: receipt.providerName,
+                    name: receipt.providerName,
                     productsReceived: [...receipt.productsReceived],
-                    providerId: receipt.providerId
+                    providerId: receipt.providerId,
+                    date: receipt.date
                 }
             })
             const newSate = {...state, listOfReceipts: newStateListOfReceipts}
