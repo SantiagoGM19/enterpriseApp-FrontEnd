@@ -20,16 +20,21 @@ const providerSlice = createSlice({
         },
         addProvider(state, action) {
             const newListOfProviders = [...state.listOfProviders, action.payload]
-            const newState = {...state, listOfProviders: newListOfProviders}
+            const newState = { ...state, listOfProviders: newListOfProviders }
             return newState
         },
         updateProviderState(state, action) {
-            const newListOfProviders = state.listOfProviders.filter(provider => provider.providerId !== action.payload)
-            const newState = {...state, listOfProviders: newListOfProviders}
-            return newState
+            const newListOfProviders = state.listOfProviders.map(provider => {
+                if(provider.providerId === action.payload.providerId){
+                    return action.payload
+                }
+                return provider
+            })
         },
         deleteProviderState(state, action) {
-            
+            const newListOfProviders = state.listOfProviders.filter(provider => provider.providerId !== action.payload)
+            const newState = { ...state, listOfProviders: newListOfProviders }
+            return newState
         }
     }
 })

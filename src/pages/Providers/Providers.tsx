@@ -4,8 +4,8 @@ import '../styles/products.css'
 import { ProviderObject } from '../../state/ObjectsTypes'
 import { useDispatch, useSelector } from 'react-redux'
 import { stateType } from '../../state/Store'
-import { deleteProvider, fetchAllProviders, saveProvider } from '../../services/ProvidersServices'
-import { addProvider, deleteProviderState, getAllProviders } from '../../state/ProviderSlice'
+import { deleteProvider, fetchAllProviders, saveProvider, updateProvider } from '../../services/ProvidersServices'
+import { addProvider, deleteProviderState, getAllProviders, updateProviderState } from '../../state/ProviderSlice'
 import { Modal, ModalBody, ModalHeader, FormGroup, ModalFooter, Button } from 'reactstrap'
 
 function Providers() {
@@ -14,7 +14,7 @@ function Providers() {
   const [nameProvider, setNameProvider] = useState("")
   const [phone, setPhone] = useState("")
   const [isUpdating, setIsUpdating] = useState(false)
-  const [fieldsEmpty, setFieldsEmpty] = useState(false)
+  const [areFieldsEmpty, setAreFieldsEmpty] = useState(false)
   const [providerId, setProviderId] = useState("")
   const { listOfProviders } = useSelector((state: stateType) => state.provider)
   const dispatch = useDispatch()
@@ -25,27 +25,44 @@ function Providers() {
         dispatch(getAllProviders(providers))
       }
     )
-  }, listOfProviders)
+  }, [listOfProviders])
 
   const onAddProvider = async () => {
     if (nameProvider !== "" && phone !== "") {
       setModalUpdateOpen(false)
-      setFieldsEmpty(false)
+      setAreFieldsEmpty(false)
       let newProvider: ProviderObject = {
         name: nameProvider,
         phone: phone
       }
       let providerAdded = await saveProvider(newProvider)
       dispatch(addProvider(providerAdded))
-      setNameProvider("")
-      setPhone("")
+      cleanFields()
     } else {
-      setFieldsEmpty(true)
+      setAreFieldsEmpty(true)
     }
+  }
+  
+  const cleanFields = () => {
+    setNameProvider("")
+    setPhone("")
+    setProviderId("")
   }
 
   const onUpdateProvider = async () => {
-
+    if(nameProvider !== "" && phone !== ""){
+      setModalUpdateOpen(false)
+      setAreFieldsEmpty(false)
+      let provider = {
+        name: nameProvider,
+        phone: phone
+      }
+      let providerUpdated = await updateProvider(provider, providerId)
+      dispatch(updateProviderState(providerUpdated))
+      cleanFields()
+    }else{
+      setAreFieldsEmpty(true)
+    }
   }
 
   const onDeleteProvider = async (id: string | undefined) => {
@@ -102,17 +119,17 @@ function Providers() {
         <ModalBody>
           <FormGroup>
             <label>Name</label>
-            <input required type="text" className='form-control' onChange={(e) => setNameProvider(e.target.value)} value={isUpdating?nameProvider:""} />
+            <input required type="text" className='form-control' onChange={(e) => setNameProvider(e.target.value)} value={nameProvider} />
             <label>Phone</label>
-            <input required type="text" className='form-control' onChange={(e) => setPhone(e.target.value)} value={isUpdating?phone:""} />
-            {fieldsEmpty ? <div className="alert alert-danger" role="alert">
+            <input required type="text" className='form-control' onChange={(e) => setPhone(e.target.value)} value={phone} />
+            {areFieldsEmpty ? <div className="alert alert-danger" role="alert">
               There are empty fields!
             </div>:<></>}
           </FormGroup>
         </ModalBody>
         <ModalFooter>
           <Button className="btn btn-success" onClick={() => { isUpdating ? onUpdateProvider() : onAddProvider()}} >Save</Button>
-          <Button className="btn btn-danger" onClick={() => {setModalUpdateOpen(false); setFieldsEmpty(false)}} >Cancel</Button>
+          <Button className="btn btn-danger" onClick={() => {setModalUpdateOpen(false); setAreFieldsEmpty(false); cleanFields()}} >Cancel</Button>
         </ModalFooter>
       </Modal>
     </div>

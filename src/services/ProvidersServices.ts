@@ -19,8 +19,8 @@ export const saveProvider = async (provider: ProviderObject) => {
     return providerSaved
 };
 
-export const updateProvider = async (provider: ProviderObject) => {
-    let providerUpdatedPromise = await fetch(`http://localhost:8081/providers/${provider.providerId}`,
+export const updateProvider = async (provider: ProviderObject, providerId:string) => {
+    let providerUpdatedPromise = await fetch(`http://localhost:8081/providers/${providerId}`,
         {
             method: 'PUT',
             headers: {
