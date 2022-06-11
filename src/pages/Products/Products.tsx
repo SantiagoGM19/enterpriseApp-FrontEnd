@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchAllProducts } from '../services/ProductsServices'
-import { Product } from '../state/ObjectsTypes'
-import { getAllProducts } from '../state/ProductSlice'
-import { stateType } from '../state/Store'
-import "./styles/products.css"
+import { fetchAllProducts } from '../../services/ProductsServices'
+import { Product } from '../../state/ObjectsTypes'
+import { getAllProducts } from '../../state/ProductSlice'
+import { stateType } from '../../state/Store'
+import "../styles/products.css"
 
 function Products() {
 
@@ -23,9 +23,9 @@ function Products() {
     return (
         <div>
             <h1>Your products</h1>
-            <div className='products-container' >
+            <div className='container' >
                 {listOfProducts.map((product: Product) => {
-                    return <div className="card border-dark mb-3 product" style={{ maxWidth: '18rem;', border: 'solid' }}>
+                    return <div className="card border-dark mb-3 product" key={product.id} style={{ maxWidth: '18rem', border: 'solid' }}>
                         <div className="card-header bg-transparent">
                             <button type="button" className="btn btn-danger" style={{ fontWeight: 'bold', fontSize: '15px' }}>
                                 X
@@ -51,6 +51,9 @@ function Products() {
                 <button type="button" className="btn btn-success add-product">
                     +
                 </button>
+                {listOfProducts.length !== 0 ?
+                    <div></div> :
+                    <div style={{marginTop:'16%'}}><h1 style={{ color: 'white' }}>Add a new product!</h1></div>}
             </div>
         </div>
     )

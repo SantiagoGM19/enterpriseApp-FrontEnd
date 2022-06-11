@@ -1,9 +1,9 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom"
-import Bills from "./components/Bills"
-import MainPage from "./components/MainPage"
-import Products from "./components/Products"
-import Providers from "./components/Providers"
-import Receipts from "./components/Receipts"
+import Bills from "./pages/Bills/Bills"
+import MainPage from "./pages/MainPage"
+import Products from "./pages/Products/Products"
+import Providers from "./pages/Providers/Providers"
+import Receipts from "./pages/Receipts/Receipts"
 
 function App() {
 

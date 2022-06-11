@@ -1,12 +1,13 @@
-.products-container{
+.container{
     margin-top: 2%;
     margin-left: 8%;
     margin-right: 8%;
     height: fit-content;
     border: solid 0px;
-    box-shadow: 6px 6px rgba(0, 0, 0, 0.73);
-    background-color: rgba(71, 61, 139, 0.758);
+    box-shadow: 5px 5px rgba(0, 0, 0, 0.92);
+    background-color: #1d2d50e1;
     display: flex;
+    flex-wrap: wrap;
     border-radius: 40px;
 }
 
