@@ -5,7 +5,7 @@ const initialState = {
         {
             receiptId: '',
             name: '',
-            productsReceived: [
+            receivedProducts: [
                 {
                     productId: "",
                     name: "",
@@ -36,7 +36,7 @@ const receiptSlice = createSlice({
             const newStateListOfReceipts = listOfReceipts.map(receipt => {
                 return {receiptId: receipt.receiptId, 
                     name: receipt.providerName,
-                    productsReceived: [...receipt.productsReceived],
+                    receivedProducts: [...receipt.receivedProducts],
                     providerId: receipt.providerId,
                     date: receipt.date
                 }

@@ -18,7 +18,7 @@ export type ProviderObject = {
 export type Receipt = {
     receiptId?:string,
     name:string,
-    productsReceived:Product[],
+    receivedProducts:Product[],
     providerId:string,
     date: string
 }

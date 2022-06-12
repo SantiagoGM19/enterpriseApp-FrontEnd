@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Provider, useDispatch, useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { fetchAllProducts, fetchProductById, updateProduct } from '../../services/ProductsServices'
 import { fetchAllProviders } from '../../services/ProvidersServices'
@@ -108,7 +108,7 @@ function ReceiptForm() {
             let yyyy = dateNumber.getFullYear()
             const receiptToAdd:Receipt = {
                 name: listOfProductsAdded[0].provider.name,
-                productsReceived: listOfProductsAdded,
+                receivedProducts: listOfProductsAdded,
                 providerId: providerId,
                 date: yyyy+'-'+mm+'-'+dd
             }
