@@ -11,7 +11,7 @@ const initialState = {
             stock: 0,
             price: 0.0,
             provider: {
-                id: "",
+                providerId: "",
                 name: "",
                 phone: ""
             }

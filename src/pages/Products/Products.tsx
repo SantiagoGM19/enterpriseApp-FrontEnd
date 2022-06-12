@@ -13,7 +13,7 @@ import { useForm } from 'react-hook-form'
 function Products() {
 
     const [modalUpdateOpen, setModalUpdateOpen] = useState(false)
-    const [product, setProduct] = useState({
+    const [product, setProduct] = useState<Product>({
         name: "",
         description: "",
         minimum: 0,
@@ -28,7 +28,8 @@ function Products() {
     })
     const [isUpdating, setIsUpdating] = useState(false)
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(false)
-    const [providerValues, setProviderValues] = useState([""])
+    const [providerValues, setProviderValues] = useState<string[]>([])
+    const [fields, setFields] = useState<any[]>([])
     const { register } = useForm()
     const { listOfProducts } = useSelector((state: stateType) => state.product)
     const { listOfProviders } = useSelector((state: stateType) => state.provider)
@@ -48,6 +49,15 @@ function Products() {
         )
     }, [listOfProducts])
 
+    useEffect(() => {
+        const newProviderObject = {
+            providerId: providerValues[0],
+            name: providerValues[1],
+            phone: providerValues[2]
+        }
+        setProduct({ ...product, provider: { ...newProviderObject } })
+    }, [listOfProducts])
+
 
     const cleanFields = () => {
         setProduct({
@@ -63,27 +73,29 @@ function Products() {
                 phone: ""
             }
         })
+        setProviderValues([])
     }
 
     const onAddProduct = async () => {
+        verifyEmptyFields()
         if (!areFieldsEmpty) {
-            const newProviderObject = {
-                providerId: providerValues[0],
-                name: providerValues[1],
-                phone: providerValues[2]
-            }
-            setProduct({ ...product, provider: newProviderObject })
             let productAdded = await addProduct(product)
             dispatch(saveProduct(productAdded))
         }
+        cleanFields()
     }
 
-    const verifyEmptyFields = (event: React.InputHTMLAttributes<HTMLInputElement>) => {
-        if (event.value === "" || event.value === 0 || event.value === 0.0) {
-            setAreFieldsEmpty(true)
-        }else{
-            setAreFieldsEmpty(false)
-        }
+    const verifyEmptyFields = () => {
+        fields.map(field => {
+            if(field === 0 || field === "" || field === 0.0 || field === undefined){
+                setAreFieldsEmpty(true)
+            }
+        })
+        providerValues.map(providerValue => {
+            if(providerValue === ""){
+                setAreFieldsEmpty(true)
+            }
+        })
     }
 
     const onUpdateProduct = () => {
@@ -123,6 +135,7 @@ function Products() {
                                 <li>{product.maximum}</li>
                                 <li>{product.stock}</li>
                                 <li>${product.price}</li>
+                                <li>{product.provider.name}</li>
                             </ul>
                         </div>
                         <div className="card-footer bg-transparent border-dark">
@@ -137,9 +150,9 @@ function Products() {
                                     stock: product.stock,
                                     price: product.price,
                                     provider: {
-                                        providerId: product.provider.providerId === undefined ? "" : product.provider.providerId,
-                                        name: product.provider.name,
-                                        phone: product.provider.phone
+                                        providerId: "",
+                                        name: "",
+                                        phone: ""
                                     }
                                 })
                             }}>
@@ -162,18 +175,17 @@ function Products() {
                 <ModalBody>
                     <FormGroup>
                         <label>Name</label>
-                        <input required type="text" className='form-control' onChange={(e) => setProduct({ ...product, name: e.target.value })}
-                         onSubmit={verifyEmptyFields}/>
+                        <input required type="text" className='form-control' onChange={(e) => {setProduct({ ...product, name: e.target.value }); setFields([...fields, e.target.value])}} />
                         <label>Description</label>
-                        <input required type="text" className='form-control' onChange={(e) => setProduct({ ...product, description: e.target.value })} />
+                        <input required type="text" className='form-control' onChange={(e) => {setProduct({ ...product, description: e.target.value }); setFields([...fields, e.target.value])}} />
                         <label>minimum</label>
-                        <input type="number" min={0} className='form-control' onChange={(e) => setProduct({ ...product, minimum: parseInt(e.target.value) })} />
+                        <input type="number" min={0} className='form-control' onChange={(e) => {setProduct({ ...product, minimum: parseInt(e.target.value) }); setFields([...fields, e.target.value])}} />
                         <label>maximum</label>
-                        <input type="number" min={0} className='form-control' onChange={(e) => setProduct({ ...product, maximum: parseInt(e.target.value) })} />
+                        <input type="number" min={0} className='form-control' onChange={(e) => {setProduct({ ...product, maximum: parseInt(e.target.value) }); setFields([...fields, e.target.value])}} />
                         <label>stock</label>
-                        <input type="number" min={0} className='form-control' onChange={(e) => setProduct({ ...product, stock: parseInt(e.target.value) })} />
+                        <input type="number" min={0} className='form-control' onChange={(e) => {setProduct({ ...product, stock: parseInt(e.target.value) }); setFields([...fields, e.target.value])}} />
                         <label>price</label>
-                        <input type="number" min={0} className='form-control' onChange={(e) => setProduct({ ...product, price: parseFloat(e.target.value) })} />
+                        <input type="number" min={0} className='form-control' onChange={(e) => {setProduct({ ...product, price: parseFloat(e.target.value) }); setFields([...fields, e.target.value])}} />
                         <label>provider</label>
                         <br />
                         <select onChange={setValues}>
