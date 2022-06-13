@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, OAuthCredential } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, OAuthCredential, GithubAuthProvider } from 'firebase/auth'
 import React, { useState } from 'react'
 import { auth } from '../firebaseConfig'
 import swal from 'sweetalert'
@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router-dom'
 
 function LogIn() {
   const providerGoogleAuth = new GoogleAuthProvider();
+  const providerGitHubAuth = new GithubAuthProvider();
   const [userName, setUserName] = useState('')
   const [password, setPassword] = useState('')
   const { user } = useSelector((state: stateType) => state.logged)
@@ -70,6 +71,34 @@ function LogIn() {
       });
   }
 
+  const signInWithGitHub = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.preventDefault()
+    signInWithPopup(auth, providerGitHubAuth)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential: OAuthCredential | null = GithubAuthProvider.credentialFromResult(result);
+
+        const token = credential!.accessToken;
+        const user = result.user;
+
+        dispatch(logInInReducer(user))
+        swal({
+          title: 'Logged in',
+          text: 'Welcome!',
+          icon: 'success'
+        })
+        navigate("/products")
+      }).catch((error) => {
+        console.log(error);
+        
+        swal({
+          title: 'Error logging in!',
+          text: 'Please check your credentials',
+          icon: 'error'
+        })
+      });
+  }
+
 
   return (
     <div className='logging-container'>
@@ -85,9 +114,12 @@ function LogIn() {
             <input type="password" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
           </div>
           <button type="submit" className="btn btn-primary" onClick={logInForm}>Submit</button>
+          <h4>Log In with: </h4>
           <div className='alternative-buttons'>
+            Google
             <button className='button-google' onClick={signInWithGoogleButton}><img className='google-img' src="/src/assets/google.png" /></button>
-            <button className='button-google'><img className='google-img' src="/src/assets/github.png" /></button>
+            GitHub
+            <button className='button-google' onClick={signInWithGitHub}><img className='google-img' src="/src/assets/github.png" /></button>
           </div>
         </form>
       </div>
