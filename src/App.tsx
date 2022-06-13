@@ -28,7 +28,6 @@ function App() {
       icon: 'success'
     })
   }
-  //
 
   return (
     <BrowserRouter>

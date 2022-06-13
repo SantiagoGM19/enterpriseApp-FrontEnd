@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, Middleware } from "@reduxjs/toolkit";
 import BillSlice from "./BillSlice";
 import loggedInSlice from "./loggedInSlice";
 import ProductSlice from "./ProductSlice";
@@ -13,7 +13,11 @@ const store = configureStore({
         receipt: ReceiptSlice,
         bill: BillSlice,
         logged: loggedInSlice
-    }
+    },
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    })
 })
 
 type stateType = ReturnType<typeof store.getState>

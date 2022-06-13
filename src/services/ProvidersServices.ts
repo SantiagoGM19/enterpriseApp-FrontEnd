@@ -1,13 +1,15 @@
 import { ProviderObject } from "../state/ObjectsTypes";
 
+const URL = "https://enterpriseapp-backend.herokuapp.com/providers"
+
 export const fetchAllProviders = async () => {
-    let response = await fetch("http://localhost:8081/providers")
+    let response = await fetch(URL)
     let data = response.json()
     return data
 };
 
 export const saveProvider = async (provider: ProviderObject) => {
-    let providerSavedPromise = await fetch("http://localhost:8081/providers",
+    let providerSavedPromise = await fetch(URL,
         {
             method: 'POST',
             headers: {
@@ -20,7 +22,7 @@ export const saveProvider = async (provider: ProviderObject) => {
 };
 
 export const updateProvider = async (provider: ProviderObject, providerId:string) => {
-    let providerUpdatedPromise = await fetch(`http://localhost:8081/providers/${providerId}`,
+    let providerUpdatedPromise = await fetch(URL+"/"+providerId,
         {
             method: 'PUT',
             headers: {
@@ -33,7 +35,7 @@ export const updateProvider = async (provider: ProviderObject, providerId:string
 };
 
 export const deleteProvider = async (id: string) => {
-    let response = await fetch(`http://localhost:8081/providers/${id}`,
+    let response = await fetch(URL+"/"+id,
         {
             method: 'DELETE'
         })
