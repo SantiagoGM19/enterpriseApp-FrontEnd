@@ -1,0 +1,27 @@
+.logging-container{
+    margin: 10%;
+    border: solid;
+    border-radius: 30px;
+    background-color: #1d2d50e1;
+    color: white;
+}
+
+.elements {
+    margin: 5%;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+.google-img{
+    width: 100%;
+}
+
+.button-google{
+    margin-top: 5%;
+    margin-right: 2%;
+    width: 10%;
+}
+
+.alternative-buttons{
+    display: flex;
+}

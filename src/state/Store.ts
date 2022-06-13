@@ -1,5 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import BillSlice from "./BillSlice";
+import loggedInSlice from "./loggedInSlice";
 import ProductSlice from "./ProductSlice";
 import ProviderSlice from "./ProviderSlice";
 import ReceiptSlice from "./ReceiptSlice";
@@ -10,7 +11,8 @@ const store = configureStore({
         product: ProductSlice,
         provider: ProviderSlice,
         receipt: ReceiptSlice,
-        bill: BillSlice
+        bill: BillSlice,
+        logged: loggedInSlice
     }
 })
 
