@@ -87,9 +87,9 @@ function Providers() {
             </div>
             <div className="card-body text-dark">
               <h5 className="card-title">{provider.providerId}</h5>
-              <ul>
-                <li>{provider.name}</li>
-                <li>{provider.phone}</li>
+              <ul style={{listStyle: 'none'}}>
+                <li><b>Provider: </b>{provider.name}</li>
+                <li><b>Phone: </b>{provider.phone}</li>
               </ul>
             </div>
             <div className="card-footer bg-transparent border-dark">

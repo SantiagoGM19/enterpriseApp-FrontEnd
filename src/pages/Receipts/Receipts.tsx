@@ -34,10 +34,11 @@ function Receipts() {
           </div>
           <div className="card-body text-dark">
             <h5 className="card-title">{receipt.receiptId}</h5>
-            <ul>
-              <li>{receipt.name}</li>
+            <ul style={{listStyle: 'none'}}>
+              <li><b>provider: </b>{receipt.name}</li>
+              <li><b>providerId: </b>{receipt.providerId}</li>
+              <li><b>date: </b>{receipt.date}</li>
               <li><button type="button" className="btn btn-info">See products</button></li>
-              <li>{receipt.providerId}</li>
             </ul>
           </div>
           <div className="card-footer bg-transparent border-dark">

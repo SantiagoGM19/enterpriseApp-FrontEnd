@@ -129,13 +129,13 @@ function Products() {
                         </div>
                         <div className="card-body text-dark">
                             <h5 className="card-title">{product.name}</h5>
-                            <ul>
-                                <li>{product.description}</li>
-                                <li>{product.minimum}</li>
-                                <li>{product.maximum}</li>
-                                <li>{product.stock}</li>
-                                <li>${product.price}</li>
-                                <li>{product.provider.name}</li>
+                            <ul style={{listStyle: 'none'}}>
+                                <li><b>description: </b>{product.description}</li>
+                                <li><b>minimum: </b>{product.minimum}</li>
+                                <li><b>maximum: </b>{product.maximum}</li>
+                                <li><b>stock: </b>{product.stock}</li>
+                                <li><b>price: </b>${product.price}</li>
+                                <li><b>provider: </b>{product.provider.name}</li>
                             </ul>
                         </div>
                         <div className="card-footer bg-transparent border-dark">
